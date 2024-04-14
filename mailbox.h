@@ -55,3 +55,17 @@ unsigned execute_qpu(int file_desc, unsigned num_qpus, unsigned control,
 unsigned qpu_enable(int file_desc, unsigned enable);
 
 #endif
+
+#if __linux__   //  or #if __GNUC__
+    #if __aarch64__
+        #define ENV64
+    #else
+        #define ENV32
+    #endif
+#endif
+
+#ifdef ENV64
+    #define MBS unsigned long 
+#else
+    #define MBS unsigned
+#endif 
